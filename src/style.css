@@ -1,0 +1,31 @@
+:root {
+    /* colors  */
+    --Desaturated-Dark-Cyan: hsl(180, 29%, 50%);
+    --Desaturated-Light-Cyan: hsl(180, 31%, 95%);
+    --Light-Grayish-Cyan: hsl(180, 52%, 96%);
+    --Dark-Grayish-Cyan: hsl(180, 8%, 52%);
+    --Very-Dark-Grayish-Cyan: hsl(180, 14%, 20%);
+    /* font  */
+    /* ====font-size */
+    --font-xxsm: ;
+    --font-sm: ;
+    --font-nml: 15px;
+    --font-md: ;
+    --font-lg: ;
+    --font-xxlg: ;
+    /* ======font-weight */
+    --font-w500: 500;
+    --font-w700: 700;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: var(--font-nml);
+}
