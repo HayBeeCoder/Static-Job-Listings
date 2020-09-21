@@ -168,11 +168,13 @@ h3 {
 }
 
 .job__horizontal-rule {
-    margin: 1em 0;
+    margin: 1em 0 0;
+    height: 0;
+    border: 1px solid var(--clr-Dark-Grayish-Cyan);
 }
 
 .job__skill {
-    margin: 0 0.3em 0 0;
+    margin: 1em 0.3em 0 0;
     text-align: center;
     color: var(--clr-Desaturated-Dark-Cyan);
     font-size: var(--font-sm);
