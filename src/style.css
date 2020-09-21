@@ -170,7 +170,8 @@ h3 {
 .job__horizontal-rule {
     margin: 1em 0 0;
     height: 0;
-    border-top: 1px solid var(--clr-Dark-Grayish-Cyan);
+    border: 2px solid var(--clr-Dark-Grayish-Cyan);
+    border-bottom: 0;
 }
 
 .job__skill {
