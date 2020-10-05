@@ -8,3 +8,5 @@
 .DS_Store
 
 *.json
+
+node_modules/

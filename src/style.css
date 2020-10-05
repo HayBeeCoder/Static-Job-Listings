@@ -16,8 +16,8 @@ html {
     --font-xxsm: 0.6rem;
     --font-sm: 0.8rem;
     --font-nml: 1rem;
-    --font-md: 1.1rem;
-    --font-lg: 1.2rem;
+    --font-md: 1rem;
+    --font-lg: 1.15rem;
     --font-xxlg: 1.7rem;
     /* ======font-weight */
     --font-w500: 500;
@@ -44,6 +44,12 @@ span {
     display: inline-block;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 h1 {
     font-size: var(--font-lg);
     margin: 0.9em 0;
@@ -57,6 +63,7 @@ h3 {
 .container {
     width: 92%;
     margin: 0 auto;
+    max-width: 1200px;
 }
 
 .header {
@@ -70,18 +77,89 @@ h3 {
     align-items: flex-end;
 }
 
+.header__container {
+    position: relative;
+}
+
 .header__search-box {
     background: var(--clr-white);
     width: 100%;
     padding: 1em;
-    margin-bottom: -1em;
+    position: absolute;
+    transform: translateY(50%);
+    bottom: 0;
     border-radius: 5px;
     display: none;
+    align-items: center;
+}
+
+.filter__boxes {
+    flex: 1;
+}
+
+.filter__box p {
+    margin: 0;
+}
+
+.filter__list {
+    gap: 9px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filter__list-item {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.filter__key {
+    margin: 0;
+    text-align: center;
+    color: var(--clr-Desaturated-Dark-Cyan);
+    font-size: var(--font-sm);
+    font-weight: var(--font-w700);
+    background: var(--clr-Light-Grayish-Cyan);
+    display: inline-block;
+    cursor: pointer;
+    letter-spacing: 2;
+    letter-spacing: .09em;
+    padding: .7em;
+}
+
+.filter__button {
+    font-size: var(--font-sm);
+    background-color: var(--clr-Desaturated-Dark-Cyan);
+    display: grid;
+    padding: .7em;
+    cursor: pointer;
+}
+
+.filter__button:hover {
+    background-color: var(--clr-Very-Dark-Grayish-Cyan);
+}
+
+.filter__box_button {
+    border: 0;
+    cursor: pointer;
+    background: transparent;
+    outline: 0;
+    padding: 0;
+    color: var(--clr-Desaturated-Dark-Cyan);
+    font-size: var(--font-nml);
+    flex-basis: 30px;
+    padding: .7em;
+}
+
+.filter__box_button:hover,
+.filter__box_button:active {
+    text-decoration: underline;
+    color: var(--clr-Very-Dark-Grayish-Cyan);
 }
 
 .main {
     background: var(--clr-Desaturated-Light-Cyan);
-    padding: 4em 0;
 }
 
 .job-lists {
@@ -89,12 +167,12 @@ h3 {
 }
 
 .job {
-    padding: 2em 1.2em;
+    padding: 2.5em 2em 2em;
     background: var(--clr-white);
     border-radius: 8px;
     position: relative;
     max-width: 400px;
-    margin: 0 auto;
+    margin: 4.2em auto 0;
 }
 
 .job-border--left {
@@ -125,13 +203,12 @@ h3 {
     color: var(--clr-Light-Grayish-Cyan);
     background: var(--clr-Desaturated-Dark-Cyan);
     font-size: var(--font-sm);
-    line-height: 1;
     border-radius: 100px;
-    margin: 0 0 0 .8em;
-    display: inline-block;
-    font-weight: var(--font-w700);
+    margin: 0;
     text-transform: uppercase;
-    padding: .7em 1.2em;
+    display: inline-block;
+    font-weight: var(--font-w500);
+    padding: .6em 0.8em .2em;
 }
 
 .role__status-featured {
@@ -143,7 +220,7 @@ h3 {
     margin: .8em 0;
 }
 
-.job__role {
+.job__position {
     text-transform: capitalize;
     color: var(--clr-aDark-Cyan);
     margin: 0;
@@ -168,25 +245,35 @@ h3 {
 }
 
 .job__horizontal-rule {
-    margin: 1em 0 0;
-    border: 2px solid var(--clr-Dark-Grayish-Cyan);
+    margin: 1em 0;
+    border-top: 2px solid var(--clr-Light-Grayish-Cyan);
+    border-left: 0;
     border-bottom: 0;
 }
 
-.job__skill {
-    margin: 1em 0.3em 0 0;
+.job__keys {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.job__key {
+    margin: 0;
     text-align: center;
     color: var(--clr-Desaturated-Dark-Cyan);
     font-size: var(--font-sm);
     font-weight: var(--font-w700);
     background: var(--clr-Light-Grayish-Cyan);
     display: inline-block;
-    padding: .6em 0.8em;
+    padding: .5em 0.8em;
+    cursor: pointer;
 }
 
 @media (min-width: 768px) {
     .job {
-        padding-top: 2em;
+        padding: 2.5em 2em 1.8em;
+        height: 140px;
     }
     .flex {
         height: 100%;
@@ -201,8 +288,14 @@ h3 {
         display: none;
     }
     .role {
-        margin-left: 1em;
+        margin-left: 0;
         align-self: stretch;
+        height: 100%;
+    }
+    .role__company-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
     .role__title-wrapper {
         align-self: stretch;
@@ -213,17 +306,19 @@ h3 {
         align-self: center;
         margin: 0;
     }
-    .job__skills {
+    .job__keys {
         display: flex;
     }
 }
 
 @media (min-width: 1024px) {
     .job {
+        height: 120px;
         padding: 1.2em;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin: 0 0 1em;
     }
     .logo {
         position: relative;
@@ -232,7 +327,8 @@ h3 {
         width: 70px;
     }
     .role {
-        width: 90%;
+        width: 92%;
+        margin-left: .5em;
     }
     .role__company {
         margin-top: 0;

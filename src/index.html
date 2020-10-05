@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
 
     <title>Frontend Mentor | Job Listings</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -17,71 +17,22 @@
     <header class="header">
         <div class="container header__container">
             <div class="header__search-box">
+                <div class="filter__boxes">
+                    <ul class="filter__list">
 
+                    </ul>
+                </div>
+                <button class="filter__box_button">clear</button>
             </div>
         </div>
     </header>
     <main class='main'>
         <section class="job-lists">
-            <div class="container">
-                <article class="job job-border--left">
-                    <!-- LOGO  -->
-                    <div class="logo">
-                        <img src="./images/photosnap.svg" alt="Photosnap Logo" class="logo__image">
-                    </div>
-
-                    <!-- ROLE  -->
-                    <div class="role">
-                        <div class="flex">
-                            <div class="role__title-wrapper">
-                                <div class="role__company-wrapper">
-                                    <h3 class="role__company">Photosnap</h3>
-                                    <p class="role__status role__status-new">
-                                        NEW!
-                                    </p>
-
-                                    <p class='role__status role__status-featured'>
-                                        featured
-                                    </p>
-                                </div>
-
-                                <div class="job__role-wrapper">
-                                    <h1 class="job__role">senior frontend developer</h1>
-
-                                </div>
-                                <div class="job__post-time-wrapper">
-                                    <span class="job__post-time job__info ">1d ago</span>
-                                    <span class="tittle job__info">.</span>
-                                    <span class="job__duration job__info">Full Time</span>
-                                    <span class="tittle job__info">.</span>
-                                    <span class="job__location job__info">USA only</span>
-                                </div>
-
-                                <!-- </div> -->
-
-                            </div>
-                            <hr class="job__horizontal-rule">
-
-                            <!-- SKILLS -->
-                            <div class="job__skills">
-                                <p class="job__skill">Frontend</p>
-                                <p class="job__skill">Senior</p>
-                                <p class="job__skill">HTML</p>
-                                <p class="job__skill">CSS</p>
-                                <p class="job__skill">JavaScript</p>
-                            </div>
-                        </div>
-                </article>
-                </div>
+            <div class="container jobs__container"></div>
         </section>
     </main>
 
-    <!-- <div class="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Your Name Here</a>.
-    </div> -->
-
-    <script src="data.json"></script>
-    <script src="main.js"></script>
+    <script src="./script/main.js"></script>
 </body>
 
 </html>
