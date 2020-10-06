@@ -1,5 +1,4 @@
 const filter_box = document.querySelector('.header__search-box');
-
 const filter_list = document.querySelector(".filter__list");
 const jobs_container = document.querySelector(".jobs__container");
 
@@ -7,7 +6,7 @@ let jobsData;
 let url = 'http://localhost:8080/data.json';
 var top_box = document.querySelector('.header__search-box');
 let filters = [];
-
+const template = document.createElement("template");
 
 
 
@@ -22,12 +21,10 @@ fetch(url)
         jobsData = data;
         initialize()
     })
-    .catch(err => {
-        console.log("Network request failed with response " + err.status + ": " + err.statusText);
-    })
 
 
-const template = document.createElement("template");
+
+
 template.innerHTML = `
     <article class="job">
         <!-- LOGO  -->
@@ -75,47 +72,54 @@ template.innerHTML = `
 function initialize() {
 
     updateDisplay(jobsData);
+    listen_for_keys();
 
     function updateDisplay(jobsToDisplay) {
+        // displays each job card 
         for (let i = 0; i < jobsToDisplay.length; i++) {
             showJob(jobsToDisplay[i]);
         }
     }
 
-    listen_for_keys()
 
-    function listen_for_cancel_keys(keys) {
-        const cancel_btns = Array.from(document.querySelectorAll('.filter__button'));
-        console.log(cancel_btns)
+
+    function listen_for_cancel_keys() {
+        let cancel_btns = Array.from(document.querySelectorAll('.filter__button'));
+        const clear_btn = document.querySelector(".filter__box_button");
+
         for (let btn of cancel_btns) {
+            // adds listener for click on all cancel buttons
             btn.addEventListener("click", () => {
-                if (cancel_btns.length == 1) filter_box.style.display = "";
-                jobs_container.innerHTML = "";
-                console.log('I was clicked')
-                btn.parentElement.remove();
+                // removes clicked cancel button from  cancel buttons array
+                console.log(cancel_btns.length)
+                    // BUGS ;LSKFJKSDJ
                 filters = filters.filter(f => f !== btn.dataset.key);
-                // cancel_btns.forEach(btn => btn.removeEventListener("click", () => {}))
+                console.log(cancel_btns);
+                cancel_btns.splice(cancel_btns.indexOf(btn), 1);
+                console.log(cancel_btns);
+                if (cancel_btns.length == 0) filter_box.style.display = "";
+
+
+
+                // clears container holding all jobs to redraw filtered jobs 
+                jobs_container.innerHTML = "";
+                // removes filter that contains the clicked button from filter box
+                btn.parentElement.remove();
+                // updates filters 
+
                 updateDisplay(filterJobs(jobsData, filters));
-
+                // listens for  clicks on job keys 
                 listen_for_keys();
-                // btn.removeEventListener("click", () => { console.log("removed") });
-
             })
         }
 
-
-        const clear_btn = document.querySelector(".filter__box_button");
-
         clear_btn.addEventListener('click', () => {
-            console.log(jobsData.length);
-            filters.length = 0;
+            // clears filters content 
+            filters = [];
             filter_box.style.display = filter_list.innerHTML = jobs_container.innerHTML = "";
-            console.log(jobsData)
             updateDisplay(jobsData);
-            keys.forEach(k => k.removeEventListener("click", () => { console.log("removed") }))
             listen_for_keys();
         })
-
     }
 
 
@@ -127,25 +131,19 @@ function initialize() {
         const job_keys = document.querySelectorAll(".job__key");
         for (let key of job_keys) {
             key.addEventListener('click', () => {
-                job_keys.forEach(key => key.removeEventListener('click', () => { console.log('removed') }))
-
+                //on job key press , shows the filter_box at the heading
                 if (filter_box.style.display === "") filter_box.style.display = "flex";
 
+                // avoid duplicating filter box's contents
                 if (!filters.includes(key["data-key-value"])) {
                     filter_list.appendChild(buildFilter(key["data-key-value"]));
                     filters.push(key["data-key-value"])
-                        // console.log(filters)
                 };
-                console.log(jobs_container)
-                job_keys.forEach(key => key.removeEventListener('click', () => { console.log('removed') }))
-
                 jobs_container.innerHTML = '';
-                job_keys.forEach(key => key.removeEventListener('click', () => { console.log('removed') }))
-
                 updateDisplay(filterJobs(jobsData, filters));
-                console.log(jobsData);
-                job_keys.forEach(key => key.removeEventListener('click', () => { console.log('removed') }))
+                // listens for clicks on other keys
                 listen_for_keys();
+                // listens for clicks on other cancel keys
                 listen_for_cancel_keys(job_keys);
             })
 
@@ -171,7 +169,7 @@ function buildFilter(name) {
 
 function filterJobs(jobs, a) {
     let filters = a;
-    console.log(filters)
+
     const jobstoDisplay = jobs.filter(job => {
         let details = [job.role, job.level, ...job.tools, ...job.languages]
         for (let filter of filters) {
@@ -179,7 +177,7 @@ function filterJobs(jobs, a) {
         }
         return true;
     })
-    console.log(jobstoDisplay);
+
     return jobstoDisplay;
 }
 
